@@ -8,5 +8,4 @@ controllers:
 kernel:
   resource: App\Kernel
   type: attribute
-Je fais une autre ligne
   
