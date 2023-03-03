@@ -16,7 +16,12 @@ class BlogApiController extends AbstractController
      *  add a hidden field called _method with the method to use (e.g. <input type="hidden" name="_method" value="PUT">).
      *  If you create your forms with Symfony Forms this is done automatically for you when the framework.http_method_override option is true.
      */
-    #[Route('/posts/{id}', methods: ['GET', 'HEAD'])]
+    //Show() allow request GET and HEAD only if ID is lower than 1000, so if id > 1000 the only allowed method is PUT
+    #[Route(
+        '/posts/{id}',
+        methods: ['GET', 'HEAD'],
+        condition: "params['id'] < 1000"
+    )]
     public function show(int $id): Response
     {
         return $this->render('blog_api/index.html.twig', [
@@ -29,6 +34,18 @@ class BlogApiController extends AbstractController
     {
         return $this->render('blog_api/index.html.twig', [
             'method' => 'edit',
+        ]);
+    }
+
+    #[Route(
+        '/contact',
+        name: 'contact',
+        condition: "context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'",
+    )]
+    public function contact(): Response
+    {
+        return $this->render('blog_api/index.html.twig', [
+            'method' => 'contact',
         ]);
     }
 }
