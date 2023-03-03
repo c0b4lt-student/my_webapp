@@ -7,5 +7,6 @@ controllers:
 
 kernel:
   resource: App\Kernel
-  type: attributes
+  type: attribute
+je rajoute une ligne
   
