@@ -8,5 +8,5 @@ controllers:
 kernel:
   resource: App\Kernel
   type: attribute
-je rajoute une ligne
+Je fais une autre ligne
   
